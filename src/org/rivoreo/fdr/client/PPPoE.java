@@ -10,6 +10,9 @@ class PPPoE {
 	public PPPoE(PPP ppp) {
 		this.ppp = ppp;
 		ppp.set_mtu(1496);
+		ppp.set_accomp(true);
+		ppp.set_default_asyncmap(true);
+		ppp.set_persist(true);
 	}
 
 	private PPP ppp;
