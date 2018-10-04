@@ -7,6 +7,13 @@ import java.util.Set;
 import java.util.HashSet;
 
 class PPPoE {
+	public PPPoE(PPP ppp) {
+		this.ppp = ppp;
+		ppp.set_mtu(1496);
+	}
+
+	private PPP ppp;
+
 	public static String[] get_ethernet_interfaces() {
 		Set<String> if_set = new HashSet<String>();
 		try {
