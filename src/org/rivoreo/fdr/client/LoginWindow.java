@@ -1,3 +1,5 @@
+package org.rivoreo.fdr.client;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,7 +8,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by papadave on 2015/12/16.
  */
-public class WTF1 extends JFrame implements ActionListener {
+public class LoginWindow extends JFrame implements ActionListener {
     JLabel JLabelpic, JLabeluser, JLabelpass, jLabelauto, jLabelremember,JLabelNetCard;
     JTextField JTextFielduser;
     JPasswordField JPasswordField;
@@ -14,7 +16,7 @@ public class WTF1 extends JFrame implements ActionListener {
     JButton JButtonlogin, JButtonClean;
     JComboBox JComboBoxNetType,JComboBoxNetCard;
 
-    public WTF1(String title){
+    public LoginWindow(String title){
         super(title);
         //调用父类的构造方法，完成标题初始化
         Container cp = this.getContentPane();
@@ -22,7 +24,7 @@ public class WTF1 extends JFrame implements ActionListener {
         cp.setLayout(null);
         //网络类型
         String[] NetType = {"教育网2M", "联通20M", "联通合约30M", "电信合约10M"};
-        String[] NetCard = {"eth0"};
+        String[] NetCard = PPPoE.get_ethernet_interfaces();
         //组件信息
         JLabelpic = new JLabel(new ImageIcon("image/1.png"));
         JLabelpic.setBounds(0, 0, 300, 80);
@@ -79,7 +81,7 @@ public class WTF1 extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        WTF1 frame = new WTF1("WTF客户端");
+        LoginWindow frame = new LoginWindow("WTF客户端");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setSize(300, 270);
