@@ -14,6 +14,9 @@ class PPPoE {
 			while(interfaces.hasMoreElements()) {
 				NetworkInterface i = interfaces.nextElement();
 				System.err.println(i);
+				if(i.isVirtual()) continue;
+				if(i.isLoopback()) continue;
+				if(i.isPointToPoint()) continue;
 				if_set.add(i.getName());
 			}
 		} catch(SocketException e) {
