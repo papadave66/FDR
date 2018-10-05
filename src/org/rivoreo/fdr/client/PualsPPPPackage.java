@@ -1,5 +1,7 @@
 package org.rivoreo.fdr.client;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -30,6 +32,8 @@ class PualsPPPPackage implements PPP {
 	private boolean accomp = true;
 	private boolean default_asyncmap = false;
 	private int persist = -1;
+	private int lcp_echo_interval = -1;
+	private int lcp_echo_failure = -1;
 	private int speed = -1;
 
 	public void set_device_path(String device) {
@@ -87,6 +91,14 @@ class PualsPPPPackage implements PPP {
 		persist = v ? 1 : 0;
 	}
 
+	public void set_lcp_echo_interval(int v) {
+		lcp_echo_interval = v;
+	}
+
+	public void set_lcp_echo_failure(int v) {
+		lcp_echo_failure = v;
+	}
+
 	public void set_speed(int speed) {
 		this.speed = speed;
 	}
@@ -105,6 +117,14 @@ class PualsPPPPackage implements PPP {
 		if(!accomp) args.add("noaccomp");
 		if(default_asyncmap) args.add("default-asyncmap");
 		if(persist != -1) args.add(persist >= 1 ? "persist" : "nopersist");
+		if(lcp_echo_interval != -1) {
+			args.add("lcp-echo-interval");
+			args.add(String.valueOf(lcp_echo_interval));
+		}
+		if(lcp_echo_failure != -1) {
+			args.add("lcp-echo-failure");
+			args.add(String.valueOf(lcp_echo_failure));
+		}
 		if(use_pty) {
 			args.add("pty");
 			args.add(device_or_command);
@@ -142,5 +162,17 @@ class PualsPPPPackage implements PPP {
 			return true;
 		}
 		return false;
+	}
+
+	public String read_message() {
+		if(pppd_process == null) return null;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(pppd_process.getErrorStream()));
+		try {
+			if(!reader.ready()) return null;
+			return reader.readLine();
+		} catch(IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

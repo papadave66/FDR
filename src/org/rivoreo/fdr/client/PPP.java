@@ -14,8 +14,11 @@ interface PPP {
 	void set_accomp(boolean v);
 	void set_default_asyncmap(boolean v);
 	void set_persist(boolean v);
+	void set_lcp_echo_interval(int v);
+	void set_lcp_echo_failure(int v);
 	void set_speed(int speed);
 	void dial() throws MissingDeviceException;
 	void hangup();
 	boolean is_connected();
+	String read_message();
 }
