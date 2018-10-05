@@ -3,3 +3,5 @@
 out/
 FDR.iml
 *.class
+.gradle/
+build/
