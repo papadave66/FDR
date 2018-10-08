@@ -23,7 +23,7 @@ public class LoginWindow extends JFrame implements ActionListener {
         //null的layout方法，可以自定义组件位置和长度
         cp.setLayout(null);
         //网络类型
-        String[] NetType = {"教育网2M", "联通20M", "联通合约30M", "电信合约10M"};
+        String[] NetType = Tools.NETWORK_PLAN;
         String[] NetCard = PPPoE.get_ethernet_interfaces();
         //组件信息
         JLabelpic = new JLabel(new ImageIcon("image/1.png"));
@@ -70,13 +70,103 @@ public class LoginWindow extends JFrame implements ActionListener {
         cp.add(JComboBoxNetCard);
 
         JButtonlogin.addActionListener(this);
+        JCheckBoxremember.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent event){
         if (event.getSource()==JButtonlogin){
-            JOptionPane.showMessageDialog(this,"我们的功能尚未完善 XD",
-                    "我们非常抱歉", JOptionPane.INFORMATION_MESSAGE);
+            //check if the username and password is not blank
+            if (JTextFielduser.getText()!=null && JPasswordField.getPassword()!=null){
+                   PPPoE pppoe = new PPPoE(new PPP() {
+                       @Override
+                       public void set_device_path(String device) {
+
+                       }
+
+                       @Override
+                       public void set_pty_command(String command) {
+
+                       }
+
+                       @Override
+                       public void set_mtu(int mtu) {
+
+                       }
+
+                       @Override
+                       public void set_user(String user) {
+
+                       }
+
+                       @Override
+                       public void set_password(String password) {
+
+                       }
+
+                       @Override
+                       public void set_default_route(boolean v) {
+
+                       }
+
+                       @Override
+                       public void set_accomp(boolean v) {
+
+                       }
+
+                       @Override
+                       public void set_default_asyncmap(boolean v) {
+
+                       }
+
+                       @Override
+                       public void set_persist(boolean v) {
+
+                       }
+
+                       @Override
+                       public void set_lcp_echo_interval(int v) {
+
+                       }
+
+                       @Override
+                       public void set_lcp_echo_failure(int v) {
+
+                       }
+
+                       @Override
+                       public void set_speed(int speed) {
+
+                       }
+
+                       @Override
+                       public void dial() throws MissingDeviceException {
+
+                       }
+
+                       @Override
+                       public void hangup() {
+
+                       }
+
+                       @Override
+                       public boolean is_connected() {
+                           return false;
+                       }
+
+                       @Override
+                       public String read_message() {
+                           return null;
+                       }
+                   });
+                   pppoe.dial(JTextFielduser.getText(),JPasswordField.getPassword().toString(),JComboBoxNetCard.getName());
+                   //we need to check if it is connected
+                
+            }else {
+                JOptionPane.showMessageDialog(this,"请输入用户名密码",
+                               "please enter username and password", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
+
     }
 
 
