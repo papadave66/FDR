@@ -36,6 +36,8 @@ class PaulsPPPPackage implements PPP {
 	private int lcp_echo_failure = -1;
 	private int speed = -1;
 
+	private BufferedReader output_reader = null;
+
 	public void set_device_path(String device) {
 		use_pty = false;
 		device_or_command = device;
@@ -105,6 +107,7 @@ class PaulsPPPPackage implements PPP {
 
 	public void dial() throws MissingDeviceException {
 		if(device_or_command == null) throw new MissingDeviceException();
+		if(is_connected()) throw new IllegalStateException("Dialing is in progress");
 		List<String> args = new ArrayList<String>();
 		args.add("pppd");
 		if(mtu != -1) {
@@ -152,6 +155,7 @@ class PaulsPPPPackage implements PPP {
 	public void hangup() {
 		if(pppd_process == null) return;
 		pppd_process.destroy();
+		output_reader = null;
 	}
 
 	public boolean is_connected() {
@@ -161,15 +165,16 @@ class PaulsPPPPackage implements PPP {
 		} catch(IllegalThreadStateException e) {
 			return true;
 		}
+		output_reader = null;
 		return false;
 	}
 
-	public String read_message() {
+	public String read_message(boolean blocking) {
 		if(pppd_process == null) return null;
-		BufferedReader reader = new BufferedReader(new InputStreamReader(pppd_process.getErrorStream()));
+		if(output_reader == null) output_reader = new BufferedReader(new InputStreamReader(pppd_process.getInputStream()));
 		try {
-			if(!reader.ready()) return null;
-			return reader.readLine();
+			if(!blocking && !output_reader.ready()) return null;
+			return output_reader.readLine();
 		} catch(IOException e) {
 			e.printStackTrace();
 			return null;

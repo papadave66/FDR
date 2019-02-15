@@ -20,5 +20,5 @@ interface PPP {
 	void dial() throws MissingDeviceException;
 	void hangup();
 	boolean is_connected();
-	String read_message();
+	String read_message(boolean blocking);
 }
