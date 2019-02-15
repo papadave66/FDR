@@ -16,6 +16,13 @@ public class StatusWindow {
     private JButton BtnDisconnect;
     private JButton BtnWebsite;
 
+    public StatusWindow(String username,String password,String Interface,String plan){
+        PPPoE pppoe = new PPPoE(new PaulsPPPPackage());
+        pppoe.dial(username,password,Interface);
+    }
+    StatusWindow(){
+
+    }
     public static void main(String[] args) {
         JFrame frame = new JFrame("status");
         frame.setContentPane(new StatusWindow().panel1);

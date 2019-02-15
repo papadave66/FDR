@@ -77,9 +77,10 @@ public class LoginWindow extends JFrame implements ActionListener {
         if (event.getSource()==JButtonlogin){
             //check if the username and password is not blank
             if (JTextFielduser.getText()!=null && JPasswordField.getPassword()!=null){
-                   PPPoE pppoe = new PPPoE(new PaulsPPPPackage());
-                   pppoe.dial(JTextFielduser.getText(),JPasswordField.getPassword().toString(),JComboBoxNetCard.getName());
+                   //PPPoE pppoe = new PPPoE(new PaulsPPPPackage());
+                   //pppoe.dial(JTextFielduser.getText(),JPasswordField.getPassword().toString(),JComboBoxNetCard.getName());
                    //we need to check if it is connected
+                new StatusWindow(JTextFielduser.getText(),new String(JPasswordField.getPassword()), JComboBoxNetCard.getSelectedItem().toString(),JComboBoxNetType.getSelectedItem().toString());
                 
             }else {
                 JOptionPane.showMessageDialog(this,"请输入用户名密码",
