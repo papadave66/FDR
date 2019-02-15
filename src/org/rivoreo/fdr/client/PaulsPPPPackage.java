@@ -7,11 +7,11 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 
-class PualsPPPPackage implements PPP {
-	public PualsPPPPackage() {
+class PaulsPPPPackage implements PPP {
+	public PaulsPPPPackage() {
 	}
 
-	public PualsPPPPackage(boolean use_pty, String device_or_command) {
+	public PaulsPPPPackage(boolean use_pty, String device_or_command) {
 		this.use_pty = use_pty;
 		this.device_or_command = device_or_command;
 	}
