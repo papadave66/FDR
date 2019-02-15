@@ -5,6 +5,7 @@ org/rivoreo/fdr/client/MissingDeviceException.java
 org/rivoreo/fdr/client/PaulsPPPPackage.java
 org/rivoreo/fdr/client/PPP.java
 org/rivoreo/fdr/client/PPPoE.java
+org/rivoreo/fdr/client/PPPLogThread.java
 org/rivoreo/fdr/client/Platform.java
 org/rivoreo/fdr/client/Tools.java"
 set -e

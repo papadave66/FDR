@@ -1,4 +1,5 @@
 
+package org.rivoreo.fdr.client;
 
 public class PPPLogThread extends Thread {
 	public PPPLogThread(PPP ppp) {
@@ -11,7 +12,7 @@ public class PPPLogThread extends Thread {
 		String line;
 		while(true) {
 			line = ppp.read_message(true);
-			if(!line) break;
+			if(line == null) break;
 		}
 		System.err.println("exiting PPPLogThread");
 	}
