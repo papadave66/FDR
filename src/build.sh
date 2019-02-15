@@ -7,6 +7,7 @@ org/rivoreo/fdr/client/PPP.java
 org/rivoreo/fdr/client/PPPoE.java
 org/rivoreo/fdr/client/PPPLogThread.java
 org/rivoreo/fdr/client/Platform.java
+org/rivoreo/fdr/client/StatusWindow.java
 org/rivoreo/fdr/client/Tools.java"
 set -e
 cd "`dirname \"$0\"`"

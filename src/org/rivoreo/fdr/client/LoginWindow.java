@@ -94,8 +94,8 @@ public class LoginWindow extends JFrame implements ActionListener {
     public static void main(String[] args) {
         LoginWindow frame = new LoginWindow("WTF客户端");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setVisible(true);
         frame.setSize(300, 270);
         frame.setResizable(false);
+        frame.setVisible(true);
     }
 }
